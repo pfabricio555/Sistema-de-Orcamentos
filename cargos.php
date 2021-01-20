@@ -5,7 +5,7 @@ include('conexao.php');
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Clientes</title>
+  <title>Cargos</title>
 
 
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
@@ -42,13 +42,8 @@ include('conexao.php');
     <ul class="navbar-nav mr-auto">
       
     </ul>
-    <form class="form-inline my-2 my-lg-0 mr-5">
-      <input name="txtpesquisarcpf" id="txtcpf" class="form-control mr-sm-2" type="search" placeholder="Buscar pelo CPF" aria-label="Pesquisar">
-      <button name="buttonPesquisarCPF" class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
-    </form>
-
     <form class="form-inline my-2 my-lg-0">
-      <input name="txtpesquisar" class="form-control mr-sm-2" type="search" placeholder="Buscar pelo Nome" aria-label="Pesquisar">
+      <input name="txtpesquisar" class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
       <button name="buttonPesquisar" class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
     </form>
   </div>
@@ -94,13 +89,10 @@ include('conexao.php');
                         if(isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != ''){
                           $nome = $_GET['txtpesquisar'] . '%';
                            $query = "select * from cargos where cargo LIKE '$nome'  order by cargo asc"; 
-                        }
-                        else{ 
+                        }else{
                          $query = "select * from cargos order by cargo asc"; 
                         }
 
-
-                      
                         
 
                         $result = mysqli_query($conexao, $query);
@@ -126,7 +118,8 @@ include('conexao.php');
                           <th>
                             Cargo
                           </th>
-                          <th>
+                          
+                            <th>
                             Ações
                           </th>
                         </thead>
@@ -136,7 +129,10 @@ include('conexao.php');
 
                           while($res_1 = mysqli_fetch_array($result)){
                             $nome = $res_1["cargo"];
+                           
                             $id = $res_1["id"];
+
+                           
 
                             ?>
 
@@ -144,6 +140,7 @@ include('conexao.php');
 
                              <td><?php echo $id; ?></td> 
                              <td><?php echo $nome; ?></td>
+                            
                              <td>
                              <a class="btn btn-info" href="cargos.php?func=edita&id=<?php echo $id; ?>"><i class="fa fa-pencil-square-o"></i></a>
 
@@ -188,6 +185,7 @@ include('conexao.php');
                 <label for="id_produto">Cargo</label>
                 <input type="text" class="form-control mr-2" name="txtnome" placeholder="Cargo" required>
               </div>
+             
             </div>
                    
             <div class="modal-footer">
@@ -215,25 +213,21 @@ include('conexao.php');
 <?php
 if(isset($_POST['button'])){
   $nome = $_POST['txtnome'];
-  $telefone = $_POST['txttelefone'];
-  $endereco = $_POST['txtendereco'];
-  $email = $_POST['txtemail'];
-  $cpf = $_POST['txtcpf'];
+ 
 
-
-  //VERIFICAR SE O CPF JÁ ESTÁ CADASTRADO
-  $query_verificar = "select * from clientes where cpf = '$cpf' ";
+  //VERIFICAR SE O CARGO JÁ ESTÁ CADASTRADO
+  $query_verificar = "select * from cargos where cargo = '$nome' ";
 
   $result_verificar = mysqli_query($conexao, $query_verificar);
   $row_verificar = mysqli_num_rows($result_verificar);
 
   if($row_verificar > 0){
-  echo "<script language='javascript'> window.alert('CPF já Cadastrado!'); </script>";
+  echo "<script language='javascript'> window.alert('Cargo já Cadastrado!'); </script>";
   exit();
   }
 
 
-$query = "INSERT into clientes (nome, telefone, endereco, email, cpf, data) VALUES ('$nome', '$telefone', '$endereco', '$email', '$cpf', curDate() )";
+$query = "INSERT into cargos (cargo) VALUES ('$nome')";
 
 $result = mysqli_query($conexao, $query);
 
@@ -241,7 +235,7 @@ if($result == ''){
   echo "<script language='javascript'> window.alert('Ocorreu um erro ao Cadastrar!'); </script>";
 }else{
     echo "<script language='javascript'> window.alert('Salvo com Sucesso!'); </script>";
-    echo "<script language='javascript'> window.location='clientes.php'; </script>";
+    echo "<script language='javascript'> window.location='cargos.php'; </script>";
 }
 
 }
@@ -252,9 +246,9 @@ if($result == ''){
 <?php
 if(@$_GET['func'] == 'deleta'){
   $id = $_GET['id'];
-  $query = "DELETE FROM clientes where id = '$id'";
+  $query = "DELETE FROM cargos where id = '$id'";
   mysqli_query($conexao, $query);
-  echo "<script language='javascript'> window.location='clientes.php'; </script>";
+  echo "<script language='javascript'> window.location='cargos.php'; </script>";
 }
 ?>
 
@@ -264,7 +258,7 @@ if(@$_GET['func'] == 'deleta'){
 <?php
 if(@$_GET['func'] == 'edita'){  
 $id = $_GET['id'];
-$query = "select * from clientes where id = '$id'";
+$query = "select * from cargos where id = '$id'";
 $result = mysqli_query($conexao, $query);
 
  while($res_1 = mysqli_fetch_array($result)){
@@ -279,31 +273,16 @@ $result = mysqli_query($conexao, $query);
           <div class="modal-content">
             <div class="modal-header">
               
-              <h4 class="modal-title">Clientes</h4>
+              <h4 class="modal-title">Cargos</h4>
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
               <form method="POST" action="">
               <div class="form-group">
                 <label for="id_produto">Nome</label>
-                <input type="text" class="form-control mr-2" name="txtnome" placeholder="Nome" value="<?php echo $res_1['nome']; ?>" required>
+                <input type="text" class="form-control mr-2" name="txtnome" placeholder="Nome" value="<?php echo $res_1['cargo']; ?>" required>
               </div>
-              <div class="form-group">
-                <label for="id_produto">Telefone</label>
-                <input type="text" class="form-control mr-2" name="txttelefone" id="txttelefone" placeholder="Telefone" value="<?php echo $res_1['telefone']; ?>" required>
-              </div>
-              <div class="form-group">
-                <label for="quantidade">Endereço</label>
-                <input type="text" class="form-control mr-2" name="txtendereco" placeholder="Endereço" value="<?php echo $res_1['endereco']; ?>" required>
-              </div>
-               <div class="form-group">
-                <label for="fornecedor">Email</label>
-                 <input type="email" class="form-control mr-2" name="txtemail" placeholder="Email" value="<?php echo $res_1['email']; ?>" required>
-              </div>
-              <div class="form-group">
-                <label for="fornecedor">CPF</label>
-                 <input type="text" class="form-control mr-2" name="txtcpf" id="txtcpf" placeholder="CPF" value="<?php echo $res_1['cpf']; ?>" required>
-              </div>
+              
             </div>
                    
             <div class="modal-footer">
@@ -325,31 +304,28 @@ $result = mysqli_query($conexao, $query);
 <?php
 if(isset($_POST['buttonEditar'])){
   $nome = $_POST['txtnome'];
-  $telefone = $_POST['txttelefone'];
-  $endereco = $_POST['txtendereco'];
-  $email = $_POST['txtemail'];
-  $cpf = $_POST['txtcpf'];
+ 
 
 
-  if ($res_1['cpf'] != $cpf){
+  
 
-       //VERIFICAR SE O CPF JÁ ESTÁ CADASTRADO
-    $query_verificar = "select * from clientes where cpf = '$cpf' ";
+    //VERIFICAR SE O CARGO JÁ ESTÁ CADASTRADO
+  $query_verificar = "select * from cargos where cargo = '$nome' ";
 
-    $result_verificar = mysqli_query($conexao, $query_verificar);
-    $row_verificar = mysqli_num_rows($result_verificar);
+  $result_verificar = mysqli_query($conexao, $query_verificar);
+  $row_verificar = mysqli_num_rows($result_verificar);
 
-    if($row_verificar > 0){
-    echo "<script language='javascript'> window.alert('CPF já Cadastrado!'); </script>";
-    exit();
-    }
-
+  if($row_verificar > 0){
+  echo "<script language='javascript'> window.alert('Cargo já Cadastrado!'); </script>";
+  exit();
   }
+
+  
 
  
 
 
-$query_editar = "UPDATE clientes set nome = '$nome', telefone = '$telefone', endereco = '$endereco', email = '$email', cpf = '$cpf' where id = '$id' ";
+$query_editar = "UPDATE cargos set cargo = '$nome' where id = '$id' ";
 
 $result_editar = mysqli_query($conexao, $query_editar);
 
@@ -357,7 +333,7 @@ if($result_editar == ''){
   echo "<script language='javascript'> window.alert('Ocorreu um erro ao Editar!'); </script>";
 }else{
     echo "<script language='javascript'> window.alert('Editado com Sucesso!'); </script>";
-    echo "<script language='javascript'> window.location='clientes.php'; </script>";
+    echo "<script language='javascript'> window.location='cargos.php'; </script>";
 }
 
 }
@@ -365,13 +341,3 @@ if($result_editar == ''){
 
 
 <?php } }  ?>
-
-
-<!--MASCARAS -->
-
-<script type="text/javascript">
-    $(document).ready(function(){
-      $('#txttelefone').mask('(00) 00000-0000');
-      $('#txtcpf').mask('000.000.000-00');
-      });
-</script>
