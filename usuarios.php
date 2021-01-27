@@ -5,7 +5,7 @@ include('conexao.php');
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Funcionários</title>
+  <title>Usuários</title>
 
 
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
@@ -76,7 +76,7 @@ include('conexao.php');
               <div class="col-md-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4 class="card-title"> Tabela de Funcionários</h4>
+                    <h4 class="card-title"> Tabela de Usuários</h4>
                   </div>
                   <div class="card-body">
                     <div class="table-responsive">
@@ -88,9 +88,9 @@ include('conexao.php');
 
                         if(isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != ''){
                           $nome = $_GET['txtpesquisar'] . '%';
-                           $query = "select * from funcionarios where nome LIKE '$nome'  order by nome asc"; 
+                           $query = "select * from usuarios where nome LIKE '$nome'  order by nome asc"; 
                         }else{
-                         $query = "select * from funcionarios order by nome asc"; 
+                         $query = "select * from usuarios order by nome asc"; 
                         }
 
                         
@@ -116,21 +116,19 @@ include('conexao.php');
                             Nome
                           </th>
                           <th>
-                            CPF
+                            Usuário
                           </th>
                           <th>
-                            Telefone
+                            Senha
                           </th>
                            <th>
-                            Endereço
-                          </th>
-                            <th>
                             Cargo
                           </th>
-                           </th>
                             <th>
-                            Data
+                            Telefone
                           </th>
+                           </th>
+                            
                            </th>
                             <th>
                             Ações
@@ -143,29 +141,27 @@ include('conexao.php');
                           while($res_1 = mysqli_fetch_array($result)){
                             $nome = $res_1["nome"];
                             $telefone = $res_1["telefone"];
-                            $endereco = $res_1["endereco"];
+                            $senha = $res_1["senha"];
+                            $usuario = $res_1["usuario"];
                             $cargo = $res_1["cargo"];
-                            $cpf = $res_1["cpf"];
-                            $data = $res_1["data"];
+                        
                             $id = $res_1["id"];
-
-                            $data2 = implode('/', array_reverse(explode('-', $data)));
 
                             ?>
 
                             <tr>
 
                              <td><?php echo $nome; ?></td>
-                             <td><?php echo $cpf; ?></td> 
-                             <td><?php echo $telefone; ?></td>
-                             <td><?php echo $endereco; ?></td>
+                             <td><?php echo $usuario; ?></td> 
+                             <td><?php echo $senha; ?></td>
                              <td><?php echo $cargo; ?></td>
+                             <td><?php echo $telefone; ?></td>
                              
-                             <td><?php echo $data2; ?></td>
+                             
                              <td>
-                             <a class="btn btn-info" href="funcionarios.php?func=edita&id=<?php echo $id; ?>"><i class="fa fa-pencil-square-o"></i></a>
+                             <a class="btn btn-info" href="usuarios.php?func=edita&id=<?php echo $id; ?>"><i class="fa fa-pencil-square-o"></i></a>
 
-                             <a class="btn btn-danger" href="funcionarios.php?func=deleta&id=<?php echo $id; ?>"><i class="fa fa-minus-square"></i></a>
+                             <a class="btn btn-danger" href="usuarios.php?func=deleta&id=<?php echo $id; ?>"><i class="fa fa-minus-square"></i></a>
 
                              </td>
                             </tr>
@@ -197,29 +193,23 @@ include('conexao.php');
           <div class="modal-content">
             <div class="modal-header">
               
-              <h4 class="modal-title">Funcionários</h4>
+              <h4 class="modal-title">Usuários</h4>
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
               <form method="POST" action="">
-              <div class="form-group">
-                <label for="id_produto">Nome</label>
-                <input type="text" class="form-control mr-2" name="txtnome" placeholder="Nome" required>
-              </div>
+              
                <div class="form-group">
-                <label for="fornecedor">CPF</label>
-                 <input type="text" class="form-control mr-2" name="txtcpf" id="txtcpf" placeholder="CPF" required>
+                <label for="fornecedor">Usuário</label>
+                 <input type="text" class="form-control mr-2" name="txtusuario" id="txtusuario" placeholder="CPF" required>
               </div>
               <div class="form-group">
-                <label for="id_produto">Telefone</label>
-                <input type="text" class="form-control mr-2" name="txttelefone" id="txttelefone" placeholder="Telefone" required>
+                <label for="id_produto">Senha</label>
+                <input type="text" class="form-control mr-2" name="txtsenha" id="txtsenha" placeholder="Telefone" required>
               </div>
-              <div class="form-group">
-                <label for="quantidade">Endereço</label>
-                <input type="text" class="form-control mr-2" name="txtendereco" placeholder="Endereço" required>
-              </div>
+
                <div class="form-group">
-                <label for="fornecedor">Cargo</label>
+                <label for="fornecedor">Funcionários</label>
                 
                   <select class="form-control mr-2" id="category" name="cargo">
                   <?php
