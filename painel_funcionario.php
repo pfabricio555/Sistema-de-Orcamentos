@@ -55,7 +55,7 @@ include('verificar_login.php');
             </a>
           </li>
           <li>
-            <a href="orcamentos.php">
+            <a href="abrir_orcamentos.php">
               <i class="nc-icon nc-diamond"></i>
               <p>Orçamentos</p>
             </a>
