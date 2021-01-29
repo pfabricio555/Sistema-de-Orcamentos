@@ -127,6 +127,17 @@ include('verificar_login.php');
                   </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+
+                  <?php
+                    if($_SESSION['cargo_usuario'] == 'Administrador' || $_SESSION['cargo_usuario'] != 'Gerente'){
+                    
+                  ?>
+
+                  <a class="dropdown-item" href="painel_admin.php">Painel do Administrador</a>
+                  <a class="dropdown-item" href="painel_tesouraria.php">Painel da Tesouraria</a>
+                  <?php
+                  }
+                  ?>
                   <a class="dropdown-item" href="logout.php">Sair</a>
                 </div>
               </li>
