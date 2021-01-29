@@ -269,35 +269,24 @@ include('conexao.php');
 
 <?php
 if(isset($_POST['button'])){
-  $nome = $_POST['txtnome'];
-  $telefone = $_POST['txttelefone'];
-  $endereco = $_POST['txtendereco'];
-  $cargo = $_POST['cargo'];
-  $cpf = $_POST['txtcpf'];
+  $nome = $_POST['txtcpf'];
+  $tecnico = $_POST['funcionario'];
+  $produto = $_POST['txtproduto'];
+  $serie = $_POST['txtserie'];
+  $defeito = $_POST['txtdefeito'];
+  $obs = $_POST['txtobs'];
 
 
-  //VERIFICAR SE O CPF JÁ ESTÁ CADASTRADO
-  $query_verificar = "select * from funcionarios where cpf = '$cpf' ";
+  $query = "INSERT into orcamentos (cliente, tecnico, produto, serie, problema, obs, valor_total, data_abertura, status) VALUES ('$nome', '$tecnico', '$produto', '$serie', '$defeito', '$obs', '0', curDate(), 'Aberto' )";
 
-  $result_verificar = mysqli_query($conexao, $query_verificar);
-  $row_verificar = mysqli_num_rows($result_verificar);
+  $result = mysqli_query($conexao, $query);
 
-  if($row_verificar > 0){
-  echo "<script language='javascript'> window.alert('CPF já Cadastrado!'); </script>";
-  exit();
+  if($result == ''){
+    echo "<script language='javascript'> window.alert('Ocorreu um erro ao Cadastrar!'); </script>";
+  }else{
+      echo "<script language='javascript'> window.alert('Salvo com Sucesso!'); </script>";
+      echo "<script language='javascript'> window.location='abrir_orcamentos.php'; </script>";
   }
-
-
-$query = "INSERT into funcionarios (nome, cpf, telefone, endereco, cargo, data) VALUES ('$nome', '$cpf', '$telefone', '$endereco', '$cargo',  curDate() )";
-
-$result = mysqli_query($conexao, $query);
-
-if($result == ''){
-  echo "<script language='javascript'> window.alert('Ocorreu um erro ao Cadastrar!'); </script>";
-}else{
-    echo "<script language='javascript'> window.alert('Salvo com Sucesso!'); </script>";
-    echo "<script language='javascript'> window.location='funcionarios.php'; </script>";
-}
 
 }
 ?>
@@ -307,9 +296,9 @@ if($result == ''){
 <?php
 if(@$_GET['func'] == 'deleta'){
   $id = $_GET['id'];
-  $query = "DELETE FROM funcionarios where id = '$id'";
+  $query = "DELETE FROM orcamentos where id = '$id'";
   mysqli_query($conexao, $query);
-  echo "<script language='javascript'> window.location='funcionarios.php'; </script>";
+  echo "<script language='javascript'> window.location='orcamentos.php'; </script>";
 }
 ?>
 
