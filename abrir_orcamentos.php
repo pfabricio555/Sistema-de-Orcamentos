@@ -195,22 +195,33 @@ include('conexao.php');
           <div class="modal-content">
             <div class="modal-header">
               
-              <h4 class="modal-title">Funcionários</h4>
+              <h4 class="modal-title">Novo Orçamento</h4>
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
               <form method="POST" action="">
-              <div class="form-group">
-                <label for="id_produto">Nome</label>
-                <input type="text" class="form-control mr-2" name="txtnome" placeholder="Nome" required>
-              </div>
                <div class="form-group">
                 <label for="fornecedor">CPF</label>
                  <input type="text" class="form-control mr-2" name="txtcpf" id="txtcpf" placeholder="CPF" required>
               </div>
               <div class="form-group">
-                <label for="id_produto">Telefone</label>
-                <input type="text" class="form-control mr-2" name="txttelefone" id="txttelefone" placeholder="Telefone" required>
+                <label for="fornecedor">Técnico</label>
+                
+                  <select class="form-control mr-2" id="category" name="funcionario">
+                  <?php
+                  
+                  $query = "SELECT * FROM funcionarios where cargo = 'funcionário' ORDER BY nome asc";
+                  $result = mysqli_query($conexao, $query);
+
+                  if(count($result)){
+                    while($res_1 = mysqli_fetch_array($result)){
+                         ?>                                             
+                    <option value="<?php echo $res_1['id']; ?>"><?php echo $res_1['nome']; ?></option> 
+                         <?php      
+                       }
+                   }
+                  ?>
+                  </select>
               </div>
               <div class="form-group">
                 <label for="quantidade">Endereço</label>
