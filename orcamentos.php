@@ -87,10 +87,10 @@ include('conexao.php');
 
 
                         if(isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != ''){
-                          $nome = $_GET['txtpesquisar'] . '%';
-                           $query = "select * from orcamentos where nome LIKE '$nome'  order by nome asc"; 
+                          $data = $_GET['txtpesquisar'] . '%';
+                           $query = "select * from orcamentos where data_abertura = $data order by id asc"; 
                         }else{
-                         $query = "select * from orcamentos order by nome asc"; 
+                         $query = "select * from orcamentos where data_abertura = curDate() order by id asc"; 
                         }
 
                         
@@ -113,55 +113,53 @@ include('conexao.php');
                         <thead class=" text-primary">
                           
                           <th>
-                            Nome
+                            Cliente
                           </th>
+
                           <th>
-                            CPF
+                            Técnico
                           </th>
+
                           <th>
-                            Telefone
+                            Produto
                           </th>
-                           <th>
-                            Endereço
+
+                          <th>
+                            Valor Total
                           </th>
-                            <th>
-                            Cargo
+
+                          <th>
+                            Status
                           </th>
-                           </th>
-                            <th>
-                            Data
-                          </th>
-                           </th>
-                            <th>
+
+                          <th>
                             Ações
                           </th>
+
                         </thead>
                         <tbody>
                          
                          <?php 
 
                           while($res_1 = mysqli_fetch_array($result)){
-                            $nome = $res_1["nome"];
-                            $telefone = $res_1["telefone"];
-                            $endereco = $res_1["endereco"];
-                            $cargo = $res_1["cargo"];
-                            $cpf = $res_1["cpf"];
-                            $data = $res_1["data"];
-                            $id = $res_1["id"];
+                            $cliente = $res_1["cliente"];
+                            $tecnico = $res_1["tecnico"];
+                            $produto = $res_1["produto"];
+                            $valor_total = $res_1["valor_total"];
+                            $status = $res_1["status"];
 
-                            $data2 = implode('/', array_reverse(explode('-', $data)));
+                            $id = $res_1["id"];
 
                             ?>
 
                             <tr>
 
-                             <td><?php echo $nome; ?></td>
-                             <td><?php echo $cpf; ?></td> 
-                             <td><?php echo $telefone; ?></td>
-                             <td><?php echo $endereco; ?></td>
-                             <td><?php echo $cargo; ?></td>
+                             <td><?php echo $cliente; ?></td>
+                             <td><?php echo $tecnico; ?></td> 
+                             <td><?php echo $produto; ?></td>
+                             <td><?php echo $valor_total; ?></td>
+                             <td><?php echo $status; ?></td>
                              
-                             <td><?php echo $data2; ?></td>
                              <td>
                              <a class="btn btn-info" href="funcionarios.php?func=edita&id=<?php echo $id; ?>"><i class="fa fa-pencil-square-o"></i></a>
 
