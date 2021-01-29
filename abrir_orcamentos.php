@@ -190,7 +190,7 @@ include('conexao.php');
 
  <!-- Modal -->
       <div id="modalExemplo" class="modal fade" role="dialog">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog">
          <!-- Modal content-->
           <div class="modal-content">
             <div class="modal-header">
@@ -224,28 +224,23 @@ include('conexao.php');
                   </select>
               </div>
               <div class="form-group">
-                <label for="quantidade">Endereço</label>
-                <input type="text" class="form-control mr-2" name="txtendereco" placeholder="Endereço" required>
+                <label for="quantidade">Produto</label>
+                <input type="text" class="form-control mr-2" name="txtproduto" placeholder="Produto" required>
               </div>
-               <div class="form-group">
-                <label for="fornecedor">Cargo</label>
-                
-                  <select class="form-control mr-2" id="category" name="cargo">
-                  <?php
-                  
-                  $query = "SELECT * FROM cargos ORDER BY cargo asc";
-                  $result = mysqli_query($conexao, $query);
+              
+              <div class="form-group">
+                <label for="quantidade">Num. Série</label>
+                <input type="text" class="form-control mr-2" name="txtserie" placeholder="Número de Série" required>
+              </div>
 
-                  if(count($result)){
-                    while($res_1 = mysqli_fetch_array($result)){
-                         ?>                                             
-                    <option value="<?php echo $res_1['cargo']; ?>"><?php echo $res_1['cargo']; ?></option> 
-                         <?php      
-                       }
-                   }
-                  ?>
-                  </select>
+              <div class="form-group">
+                <label for="quantidade">Defeito</label>
+                <input type="text" class="form-control mr-2" name="txtdefeito" placeholder="Defeito" required>
+              </div>
 
+              <div class="form-group">
+                <label for="quantidade">Observações</label>
+                <input type="text" class="form-control mr-2" name="txtobs" placeholder="Observações" required>
               </div>
              
             </div>
