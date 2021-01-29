@@ -276,6 +276,17 @@ if(isset($_POST['button'])){
   $defeito = $_POST['txtdefeito'];
   $obs = $_POST['txtobs'];
 
+  //VERIFICAR SE O CPF JÁ ESTÁ CADASTRADO
+  $query_verificar = "select * from funcionarios where cpf = '$nome' ";
+
+  $result_verificar = mysqli_query($conexao, $query_verificar);
+  $row_verificar = mysqli_num_rows($result_verificar);
+
+  if($row_verificar <= 0){
+  echo "<script language='javascript'> window.alert('O Cliente não está cadastrado!'); </script>";
+  exit();
+  }
+
 
   $query = "INSERT into orcamentos (cliente, tecnico, produto, serie, problema, obs, valor_total, data_abertura, status) VALUES ('$nome', '$tecnico', '$produto', '$serie', '$defeito', '$obs', '0', curDate(), 'Aberto' )";
 
