@@ -88,9 +88,9 @@ include('conexao.php');
 
                         if(isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != ''){
                           $data = $_GET['txtpesquisar'] . '%';
-                           $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.status, c.nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf where data_abertura = $data order by id asc"; 
+                           $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.status, c.nome as cli_nome, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN funcionarios as f on o.tecnico = f.id where data_abertura = $data order by id asc"; 
                         }else{
-                         $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.status, c.nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf where data_abertura = curDate() order by id asc"; 
+                         $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.status, c.nome as cli_nome, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN funcionarios as f on o.tecnico = f.id where data_abertura = curDate() order by id asc"; 
                         }
 
                         
@@ -142,8 +142,8 @@ include('conexao.php');
                          <?php 
 
                           while($res_1 = mysqli_fetch_array($result)){
-                            $cliente = $res_1["nome"];
-                            $tecnico = $res_1["tecnico"];
+                            $cliente = $res_1["cli_nome"];
+                            $tecnico = $res_1["func_nome"];
                             $produto = $res_1["produto"];
                             $valor_total = $res_1["valor_total"];
                             $status = $res_1["status"];
@@ -350,9 +350,9 @@ $result = mysqli_query($conexao, $query);
                   $result = mysqli_query($conexao, $query);
 
                   if(count($result)){
-                    while($res_1 = mysqli_fetch_array($result)){
+                    while($res_2 = mysqli_fetch_array($result)){
                          ?>                                             
-                    <option value="<?php echo $res_1['id']; ?>"><?php echo $res_1['nome']; ?></option> 
+                    <option value="<?php echo $res_2['id']; ?>"><?php echo $res_2['nome']; ?></option> 
                          <?php      
                        }
                    }
@@ -382,7 +382,7 @@ $result = mysqli_query($conexao, $query);
             </div>
                    
             <div class="modal-footer">
-               <button type="submit" class="btn btn-success mb-3" name="button">Salvar </button>
+               <button type="submit" class="btn btn-success mb-3" name="buttonEditar">Salvar </button>
 
 
                 <button type="button" class="btn btn-danger mb-3" data-dismiss="modal">Cancelar </button>
@@ -399,41 +399,24 @@ $result = mysqli_query($conexao, $query);
 <!--Comando para editar os dados UPDATE -->
 <?php
 if(isset($_POST['buttonEditar'])){
-  $nome = $_POST['txtnome'];
-  $telefone = $_POST['txttelefone'];
-  $endereco = $_POST['txtendereco'];
-  $cargo = $_POST['cargo'];
-  $cpf = $_POST['txtcpf'];
-
-
-  if ($res_1['cpf'] != $cpf){
-
-       //VERIFICAR SE O CPF JÁ ESTÁ CADASTRADO
-    $query_verificar = "select * from funcionarios where cpf = '$cpf' ";
-
-    $result_verificar = mysqli_query($conexao, $query_verificar);
-    $row_verificar = mysqli_num_rows($result_verificar);
-
-    if($row_verificar > 0){
-    echo "<script language='javascript'> window.alert('CPF já Cadastrado!'); </script>";
-    exit();
-    }
-
-  }
-
+  $tecnico = $_POST['funcionario'];
+  $produto = $_POST['txtproduto'];
+  $serie = $_POST['txtserie'];
+  $defeito = $_POST['txtdefeito'];
+  $obs = $_POST['txtobs'];
  
 
 
-$query_editar = "UPDATE funcionarios set nome = '$nome', cpf = '$cpf', telefone = '$telefone', endereco = '$endereco', cargo = '$cargo' where id = '$id' ";
+  $query_editar = "UPDATE orcamentos set tecnico = '$tecnico', produto = '$produto', serie = '$serie', problema = '$defeito', obs = '$obs' where id = '$id' ";
 
-$result_editar = mysqli_query($conexao, $query_editar);
+  $result_editar = mysqli_query($conexao, $query_editar);
 
-if($result_editar == ''){
-  echo "<script language='javascript'> window.alert('Ocorreu um erro ao Editar!'); </script>";
-}else{
-    echo "<script language='javascript'> window.alert('Editado com Sucesso!'); </script>";
-    echo "<script language='javascript'> window.location='funcionarios.php'; </script>";
-}
+  if($result_editar == ''){
+    echo "<script language='javascript'> window.alert('Ocorreu um erro ao Editar!'); </script>";
+  }else{
+      echo "<script language='javascript'> window.alert('Editado com Sucesso!'); </script>";
+      echo "<script language='javascript'> window.location='abrir_orcamentos.php'; </script>";
+  }
 
 }
 ?>
