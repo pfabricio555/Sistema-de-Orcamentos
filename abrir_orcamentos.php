@@ -88,9 +88,9 @@ include('conexao.php');
 
                         if(isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != ''){
                           $data = $_GET['txtpesquisar'] . '%';
-                           $query = "select * from orcamentos where data_abertura = $data order by id asc"; 
+                           $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.status, c.nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf where data_abertura = $data order by id asc"; 
                         }else{
-                         $query = "select * from orcamentos where data_abertura = curDate() order by id asc"; 
+                         $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.status, c.nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf where data_abertura = curDate() order by id asc"; 
                         }
 
                         
@@ -142,7 +142,7 @@ include('conexao.php');
                          <?php 
 
                           while($res_1 = mysqli_fetch_array($result)){
-                            $cliente = $res_1["cliente"];
+                            $cliente = $res_1["nome"];
                             $tecnico = $res_1["tecnico"];
                             $produto = $res_1["produto"];
                             $valor_total = $res_1["valor_total"];
@@ -309,7 +309,7 @@ if(@$_GET['func'] == 'deleta'){
   $id = $_GET['id'];
   $query = "DELETE FROM orcamentos where id = '$id'";
   mysqli_query($conexao, $query);
-  echo "<script language='javascript'> window.location='orcamentos.php'; </script>";
+  echo "<script language='javascript'> window.location='abrir_orcamentos.php'; </script>";
 }
 ?>
 
@@ -319,7 +319,7 @@ if(@$_GET['func'] == 'deleta'){
 <?php
 if(@$_GET['func'] == 'edita'){  
 $id = $_GET['id'];
-$query = "select * from funcionarios where id = '$id'";
+$query = "select * from orcamentos where id = '$id'";
 $result = mysqli_query($conexao, $query);
 
  while($res_1 = mysqli_fetch_array($result)){
@@ -334,54 +334,55 @@ $result = mysqli_query($conexao, $query);
           <div class="modal-content">
             <div class="modal-header">
               
-              <h4 class="modal-title">Clientes</h4>
+              <h4 class="modal-title">Editar Orçamento</h4>
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
               <form method="POST" action="">
+               
               <div class="form-group">
-                <label for="id_produto">Nome</label>
-                <input type="text" class="form-control mr-2" name="txtnome" placeholder="Nome" value="<?php echo $res_1['nome']; ?>" required>
-              </div>
-
-              <div class="form-group">
-                <label for="fornecedor">CPF</label>
-                 <input type="text" class="form-control mr-2" name="txtcpf" id="txtcpf" placeholder="CPF" value="<?php echo $res_1['cpf']; ?>" required>
-              </div>
-
-              <div class="form-group">
-                <label for="id_produto">Telefone</label>
-                <input type="text" class="form-control mr-2" name="txttelefone" id="txttelefone" placeholder="Telefone" value="<?php echo $res_1['telefone']; ?>" required>
-              </div>
-              <div class="form-group">
-                <label for="quantidade">Endereço</label>
-                <input type="text" class="form-control mr-2" name="txtendereco" placeholder="Endereço" value="<?php echo $res_1['endereco']; ?>" required>
-              </div>
-               <div class="form-group">
-                <label for="fornecedor">Cargo</label>
-                 
-                 <select class="form-control mr-2" id="category" name="cargo">
+                <label for="fornecedor">Técnico</label>
+                
+                  <select class="form-control mr-2" id="category" name="funcionario">
                   <?php
                   
-                  $query = "SELECT * FROM cargos ORDER BY cargo asc";
+                  $query = "SELECT * FROM funcionarios where cargo = 'funcionário' ORDER BY nome asc";
                   $result = mysqli_query($conexao, $query);
 
                   if(count($result)){
-                    while($res_2 = mysqli_fetch_array($result)){
+                    while($res_1 = mysqli_fetch_array($result)){
                          ?>                                             
-                    <option value="<?php echo $res_2['cargo']; ?>"><?php echo $res_2['cargo']; ?></option> 
+                    <option value="<?php echo $res_1['id']; ?>"><?php echo $res_1['nome']; ?></option> 
                          <?php      
                        }
                    }
                   ?>
                   </select>
-
+              </div>
+              <div class="form-group">
+                <label for="quantidade">Produto</label>
+                <input type="text" class="form-control mr-2" name="txtproduto" value="<?php echo $res_1['produto']; ?>" placeholder="Produto" required>
               </div>
               
+              <div class="form-group">
+                <label for="quantidade">Num. Série</label>
+                <input type="text" class="form-control mr-2" name="txtserie" value="<?php echo $res_1['serie']; ?>" placeholder="Número de Série" required>
+              </div>
+
+              <div class="form-group">
+                <label for="quantidade">Defeito</label>
+                <input type="text" class="form-control mr-2" name="txtdefeito" value="<?php echo $res_1['problema']; ?>" placeholder="Defeito" required>
+              </div>
+
+              <div class="form-group">
+                <label for="quantidade">Observações</label>
+                <input type="text" class="form-control mr-2" name="txtobs" placeholder="Observações" value="<?php echo $res_1['obs']; ?>" required>
+              </div>
+             
             </div>
                    
             <div class="modal-footer">
-               <button type="submit" class="btn btn-success mb-3" name="buttonEditar">Salvar </button>
+               <button type="submit" class="btn btn-success mb-3" name="button">Salvar </button>
 
 
                 <button type="button" class="btn btn-danger mb-3" data-dismiss="modal">Cancelar </button>
