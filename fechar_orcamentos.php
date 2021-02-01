@@ -3,13 +3,12 @@ include('conexao.php');
 
 session_start();
 include('verificar_login.php');
-
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Abrir Orçamentos</title>
+  <title>Fechar Orçamentos</title>
 
 
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
@@ -65,14 +64,12 @@ include('verificar_login.php');
       <br>
 
 
-         <div class="row">
+          <div class="row">
            <div class="col-sm-12">
-            <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#modalExemplo">Inserir Novo </button>
+            <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#modalExemplo"> </button>
 
-           </div>
-
-          
-        </div>
+           </div>       
+          </div>
 
 
           <div class="content">
@@ -89,12 +86,12 @@ include('verificar_login.php');
 
                       <?php
 
-
+                        $usuario = $_SESSION['nome_usuario'];
                         if(isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != ''){
                           $data = $_GET['txtpesquisar'] . '%';
-                           $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.status, c.nome as cli_nome, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN funcionarios as f on o.tecnico = f.id where data_abertura = '$data' order by id asc"; 
+                           $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.status, c.nome as cli_nome, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN funcionarios as f on o.tecnico = f.id where data_abertura = '$data' and f.nome = '$usuario' and o.status = 'Aberto' order by o.id asc"; 
                         }else{
-                         $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.status, c.nome as cli_nome, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN funcionarios as f on o.tecnico = f.id where data_abertura = curDate() order by id asc"; 
+                         $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.status, c.nome as cli_nome, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN funcionarios as f on o.tecnico = f.id where data_abertura = curDate() and f.nome = '$usuario' and o.status = 'Aberto' order by o.id asc"; 
                         }
 
                         

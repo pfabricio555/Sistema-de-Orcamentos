@@ -57,13 +57,13 @@ include('verificar_login.php');
           <li>
             <a href="abrir_orcamentos.php">
               <i class="nc-icon nc-diamond"></i>
-              <p>Orçamentos</p>
+              <p>Abrir Orçamentos</p>
             </a>
           </li>
           <li>
-            <a href="./map.html">
+            <a href="fechar_orcamentos.php">
               <i class="nc-icon nc-pin-3"></i>
-              <p>Maps</p>
+              <p>Fechar Orçamentos</p>
             </a>
           </li>
           <li>

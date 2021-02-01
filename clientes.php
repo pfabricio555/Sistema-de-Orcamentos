@@ -231,7 +231,7 @@ include('conexao.php');
               </div>
               <div class="form-group">
                 <label for="fornecedor">CPF</label>
-                 <input type="text" class="form-control mr-2" name="txtcpf" id="txtcpf" placeholder="CPF" required>
+                 <input type="text" class="form-control mr-2" name="txtcpf" id="txtcpfMaks" placeholder="CPF" required>
               </div>
             </div>
                    
@@ -417,6 +417,6 @@ if($result_editar == ''){
 <script type="text/javascript">
     $(document).ready(function(){
       $('#txttelefone').mask('(00) 00000-0000');
-      $('#txtcpf').mask('000.000.000-00');
+      $('#txtcpfMaks').mask('000.000.000-00');
       });
 </script>
