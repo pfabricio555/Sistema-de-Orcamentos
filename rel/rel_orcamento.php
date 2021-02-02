@@ -77,6 +77,45 @@
         </div>
     </div>
 
+    <hr>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <p style="font-size:12px"><b>Dados do Aparelho</b></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <p style="font-size:12px"><b>Produto:</b></p>
+        </div>
+        <div class="col-sm-3">
+            <p style="font-size:12px"><b>Nº Série:</b></p>
+        </div>
+        <div class="col-sm-3">
+            <p style="font-size:12px"><b>Modelo:</b></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <p style="font-size:12px"><b>Defeito:</b></p>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <p style="font-size:12px"><b>Laudo Técnico</b></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <p style="font-size:12px"><b>Laudo:</b></p>
+        </div>
+    </div>
+
+    <hr>
+
 </div>
 
 <div class="footer">
