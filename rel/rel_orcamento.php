@@ -12,17 +12,37 @@
     bottom:0;
     width:100%;
     background-color: #ebebeb;
-    padding:10px;
+    padding:15px;
 }
 
 .cabecalho {    
     background-color: #ebebeb;
     padding-top:15px;
-    margin-bottom:15px;
+    margin-bottom:10px;
 }
 
 .titulo{
 	margin:0;
+}
+
+.areaTotais{
+	border : 0.5px solid #bcbcbc;
+	padding: 15px;
+	border-radius: 5px;
+	margin-right:25px;
+}
+
+.areaTotal{
+	border : 0.5px solid #bcbcbc;
+	padding: 15px;
+	border-radius: 5px;
+	margin-right:25px;
+	background-color: #f9f9f9;
+	margin-top:2px;
+}
+
+.pgto{
+	margin:1px;
 }
 
 </style>
@@ -59,21 +79,21 @@
     </div>
     <div class="row">
         <div class="col-sm-3">
-            <p style="font-size:12px"><b>Nome:</b></p>
+            <p style="font-size:12px">Nome:</p>
         </div>
         <div class="col-sm-3">
-            <p style="font-size:12px"><b>Email:</b></p>
+            <p style="font-size:12px">Email:</p>
         </div>
         <div class="col-sm-3">
-            <p style="font-size:12px"><b>Endereço:</b></p>
+            <p style="font-size:12px">Endereço:</p>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-3">
-            <p style="font-size:12px"><b>Telefone:</b></p>
+            <p style="font-size:12px">Telefone:</p>
         </div>
         <div class="col-sm-3">
-            <p style="font-size:12px"><b>CPF:</b></p>
+            <p style="font-size:12px">CPF:</p>
         </div>
     </div>
 
@@ -86,18 +106,18 @@
     </div>
     <div class="row">
         <div class="col-sm-3">
-            <p style="font-size:12px"><b>Produto:</b></p>
+            <p style="font-size:12px">Produto:</p>
         </div>
         <div class="col-sm-3">
-            <p style="font-size:12px"><b>Nº Série:</b></p>
+            <p style="font-size:12px">Nº Série:</p>
         </div>
         <div class="col-sm-3">
-            <p style="font-size:12px"><b>Modelo:</b></p>
+            <p style="font-size:12px">Modelo:</p>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <p style="font-size:12px"><b>Defeito:</b></p>
+            <p style="font-size:12px">Defeito:</p>
         </div>
     </div>
 
@@ -110,14 +130,50 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <p style="font-size:12px"><b>Laudo:</b></p>
+            <p style="font-size:12px">Laudo:</p>
         </div>
     </div>
 
+    <br><br>
+
+    <table class="table">
+        <tr bgcolor="#f2f0f1">
+            <td> <b>Peça<b> </td>
+            <td> <b>Valor Peça<b> </td>
+            <td> <b>Quantidade<b> </td>
+        </tr>
+        <tr>
+            <td> Peça </td>
+            <td> Valor Peça </td>
+            <td> 1 </td>
+        </tr>
+    </table>
+
     <hr>
+    <br><br>
+
+    <div class="row">
+        <div class="col-sm-6">
+            
+        </div>
+        <div class="col-sm-4 areaTotais">
+            <p class="pgto" style="font-size:14px"><b>Total de peças:</b></p>
+            <p class="pgto" style="font-size:14px"><b>Total Mão de Obra:</b></p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <p style="font-size:14px"><b>Técnico:</b></p>
+        </div>
+        <div class="col-sm-4 areaTotal">
+            <p style="font-size:14px"><b>Total a pagar:</b></p>
+        </div>
+    </div>
+    
 
 </div>
 
 <div class="footer">
-RODAPÉ
+<p style="text-align:center">Desenvolvido por Fabricio Conceição</p>
 </div>
