@@ -48,6 +48,7 @@ include('verificar_login.php');
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input name="txtpesquisar" class="form-control mr-sm-2" type="date" placeholder="Pesquisar" aria-label="Pesquisar">
+      <input name="txtpesquisar" class="form-control mr-sm-2" type="date" placeholder="Pesquisar" aria-label="Pesquisar">
       <button name="buttonPesquisar" class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
     </form>
   </div>
@@ -280,28 +281,28 @@ if(isset($_POST['button'])){
   $defeito = $_POST['txtdefeito'];
   $obs = $_POST['txtobs'];
 
+
   //VERIFICAR SE O CPF JÁ ESTÁ CADASTRADO
-  $query_verificar = "select * from funcionarios where cpf = '$nome' ";
+  $query_verificar = "select * from clientes where cpf = '$nome' ";
 
   $result_verificar = mysqli_query($conexao, $query_verificar);
   $row_verificar = mysqli_num_rows($result_verificar);
 
   if($row_verificar <= 0){
-  echo "<script language='javascript'> window.alert('O Cliente não está cadastrado!'); </script>";
+  echo "<script language='javascript'> window.alert('O Cliente não Está Cadastrado!'); </script>";
   exit();
-  }
+  } 
 
+$query = "INSERT into orcamentos (cliente, tecnico, produto, serie, problema, obs, valor_total, data_abertura, status) VALUES ('$nome', '$tecnico', '$produto', '$serie', '$defeito', '$obs', '0',  curDate(), 'Aberto' )";
 
-  $query = "INSERT into orcamentos (cliente, tecnico, produto, serie, problema, obs, valor_total, data_abertura, status) VALUES ('$nome', '$tecnico', '$produto', '$serie', '$defeito', '$obs', '0', curDate(), 'Aberto' )";
+$result = mysqli_query($conexao, $query);
 
-  $result = mysqli_query($conexao, $query);
-
-  if($result == ''){
-    echo "<script language='javascript'> window.alert('Ocorreu um erro ao Cadastrar!'); </script>";
-  }else{
-      echo "<script language='javascript'> window.alert('Salvo com Sucesso!'); </script>";
-      echo "<script language='javascript'> window.location='abrir_orcamentos.php'; </script>";
-  }
+if($result == ''){
+  echo "<script language='javascript'> window.alert('Ocorreu um erro ao Cadastrar!'); </script>";
+}else{
+    echo "<script language='javascript'> window.alert('Salvo com Sucesso!'); </script>";
+    echo "<script language='javascript'> window.location='abrir_orcamentos.php'; </script>";
+}
 
 }
 ?>

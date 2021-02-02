@@ -177,15 +177,13 @@ include('verificar_login.php');
 </html>
 
 
-<!--EDITAR -->
+<!--FECHAR ORÇAMENTOS -->
+
 <?php
+
 if(@$_GET['func'] == 'edita'){  
-$id = $_GET['id'];
-$query = "select * from orcamentos where id = '$id'";
-$result = mysqli_query($conexao, $query);
 
 ?>
-
   <!-- Modal -->
       <div id="modalEditar" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -238,16 +236,23 @@ $result = mysqli_query($conexao, $query);
 
 <!--Comando para editar os dados UPDATE -->
 <?php
+
+if(@$_GET['func'] == 'edita'){  
+$id = $_GET['id'];
+
 if(isset($_POST['buttonEditar'])){
-  $tecnico = $_POST['funcionario'];
-  $produto = $_POST['txtproduto'];
-  $serie = $_POST['txtserie'];
-  $defeito = $_POST['txtdefeito'];
-  $obs = $_POST['txtobs'];
+
+  $laudo = $_POST['txtlaudo'];
+  $valor_servico = $_POST['txtvalor'];
+  $pecas = $_POST['txtpecas'];
+  $valor_pecas = $_POST['txtvalorPecas'];
+  $desconto = 0;
+  $valor_total = $_POST['txtvalor'] + $_POST['txtvalorPecas'];
+  $status = 'Aguardando';
  
 
 
-  $query_editar = "UPDATE orcamentos set tecnico = '$tecnico', produto = '$produto', serie = '$serie', problema = '$defeito', obs = '$obs' where id = '$id' ";
+  $query_editar = "UPDATE orcamentos set laudo = '$laudo', valor_servico = '$valor_servico', pecas = '$pecas', valor_pecas = '$valor_pecas', desconto = '$desconto', total = '$valor_total', valor_total = '$valor_total', data_geracao = curDate(), status = '$status' where id = '$id' ";
 
   $result_editar = mysqli_query($conexao, $query_editar);
 
@@ -255,14 +260,14 @@ if(isset($_POST['buttonEditar'])){
     echo "<script language='javascript'> window.alert('Ocorreu um erro ao Editar!'); </script>";
   }else{
       echo "<script language='javascript'> window.alert('Editado com Sucesso!'); </script>";
-      echo "<script language='javascript'> window.location='abrir_orcamentos.php'; </script>";
+      echo "<script language='javascript'> window.location='fechar_orcamentos.php'; </script>";
   }
 
 }
 ?>
 
 
-<?php }   ?>
+<?php } } ?>
 
 
 <!--MASCARAS -->
