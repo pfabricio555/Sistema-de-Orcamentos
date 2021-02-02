@@ -1,13 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-<img src="https://th.bing.com/th/id/OIP.JPHw9NiIxjW-7bUeDa1_tQHaJ4?w=181&h=241&c=7&o=5&pid=1.7" alt="">
-á ê ão 
-</body>
-</html>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
+<style>
+
+
+@page {
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right:0px;
+}
+
+.footer{
+    position: fixed;
+    bottom:0;
+    left:0;
+}
+
+</style>
+
+<div class="alert alert-secondary" role="alert">
+    <img src="../img/logo.png" />
+</div>
+
+<div class="footer alert alert-secondary" role="alert">
+<footer class="navbar-fixed-bottom">RODAPÉ</footer>
+</div>
