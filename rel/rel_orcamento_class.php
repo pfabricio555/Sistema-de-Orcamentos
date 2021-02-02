@@ -1,28 +1,34 @@
-<?php 
+<?php
 
 // CARREGAR DOMPDF
 require_once '../dompdf/autoload.inc.php';
 use Dompdf\Dompdf;
+use Dompdf\Options;
 
-// ALIMENTAR OS DADOS NO RELATÓRIO
-$html = "Este é o conteúdo do relatório";
+//INSTANCIA DE OPTIONS
+$options = new Options();
+$options->setIsRemoteEnabled(true);
 
 //INICIAZIAR A CLASSE DO DOMPDF
-$pdf = new DOMPDF();
+$dompdf = new Dompdf($options);
+
+// ALIMENTAR OS DADOS NO RELATÓRIO
+$html = utf8_encode(file_get_contents("rel_orcamento.php"));
 
 // DEFINIR O TAMANHO DO PAPEL E ORIENTAÇÃO DA PÁGINA
-$pdf->set_paper(array(0,0,210, 297));
+$dompdf->setPaper('A4', 'portrait');
 
 //CARREGAR O CONTEÚDO HTML
-$pdf->load_html(utf8_decode($html));
+$dompdf->loadHtml(utf8_decode($html));
 
 //RENDERIZAR O PDF
-$pdf->render();
+$dompdf->render();
 
 //NOMEAR O PDF GERADO
-$pdf->stream(
+$dompdf->stream(
 'relatorioOrcamento.pdf',
-array("Attachment => false");
+array("Attachment" => false)
 );
 
 ?>
+
