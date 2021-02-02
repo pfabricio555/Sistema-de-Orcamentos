@@ -198,11 +198,6 @@ if(@$_GET['func'] == 'edita'){
               <form method="POST" action="">
 
               <div class="form-group">
-                <label for="quantidade">Laudo</label>
-                <input type="text-area" class="form-control mr-2" name="txtlaudo" placeholder="Laudo Técnico" required>
-              </div>
-              
-              <div class="form-group">
                 <label for="quantidade">Valor Serviço</label>
                 <input type="text" class="form-control mr-2" name="txtvalor" placeholder="Valor da Mão de Obra" required>
               </div>
@@ -215,6 +210,11 @@ if(@$_GET['func'] == 'edita'){
               <div class="form-group">
                 <label for="quantidade">Valor das Peças</label>
                 <input type="text" class="form-control mr-2" name="txtvalorPecas" placeholder="Valor das Peças" required>
+              </div>
+
+              <div class="form-group">
+                <label for="quantidade">Laudo</label>
+                <textarea class="form-control mr-2" name="txtlaudo" placeholder="Laudo Técnico" required></textarea>
               </div>
             
             </div>

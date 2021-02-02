@@ -47,7 +47,13 @@ include('verificar_login.php');
       
     </ul>
     <form class="form-inline my-2 my-lg-0">
-      <input name="txtpesquisar" class="form-control mr-sm-2" type="date" placeholder="Pesquisar" aria-label="Pesquisar">
+      <select class="form-control mr-2" id="category" name="status">
+        <option value="Todos">Todos</option>
+        <option value="Aberto">Aberto</option>
+        <option value="Aguardando">Aguardando</option>
+        <option value="Aprovado">Aprovado</option>
+        <option value="Cancelado">Cancelado</option>
+      </select>
       <input name="txtpesquisar" class="form-control mr-sm-2" type="date" placeholder="Pesquisar" aria-label="Pesquisar">
       <button name="buttonPesquisar" class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
     </form>
@@ -91,10 +97,16 @@ include('verificar_login.php');
                       <?php
 
 
-                        if(isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != ''){
+                        if(isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '' and $_GET['status'] != 'Todos'){
                           $data = $_GET['txtpesquisar'] . '%';
-                           $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.status, c.nome as cli_nome, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN funcionarios as f on o.tecnico = f.id where data_abertura = '$data' order by id asc"; 
-                        }else{
+                          $statusOrc = $_GET['status'];
+                          $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.status, c.nome as cli_nome, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN funcionarios as f on o.tecnico = f.id where data_abertura = '$data' and status = '$statusOrc' order by id asc";
+                        }
+                        else if(isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] == '' and $_GET['status'] != 'Todos'){
+                         $statusOrc = $_GET['status'];
+                         $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.status, c.nome as cli_nome, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN funcionarios as f on o.tecnico = f.id where data_abertura = curDate() and status = '$statusOrc' order by id asc";
+                        }
+                        else{
                          $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.status, c.nome as cli_nome, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN funcionarios as f on o.tecnico = f.id where data_abertura = curDate() order by id asc"; 
                         }
 
