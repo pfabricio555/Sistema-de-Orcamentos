@@ -89,9 +89,9 @@ include('verificar_login.php');
                         $usuario = $_SESSION['nome_usuario'];
                         if(isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != ''){
                           $data = $_GET['txtpesquisar'] . '%';
-                           $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.status, c.nome as cli_nome, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN funcionarios as f on o.tecnico = f.id where data_abertura = '$data' and f.nome = '$usuario' and o.status = 'Aberto' order by o.id asc"; 
+                           $query = "select o.id, o.cliente, o.tecnico, o.produto, o.problema, o.status, data_abertura, c.nome as cli_nome, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN funcionarios as f on o.tecnico = f.id where f.nome = '$usuario' and o.status = 'Aberto' order by o.id asc"; 
                         }else{
-                         $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.status, c.nome as cli_nome, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN funcionarios as f on o.tecnico = f.id where data_abertura = curDate() and f.nome = '$usuario' and o.status = 'Aberto' order by o.id asc"; 
+                         $query = "select o.id, o.cliente, o.tecnico, o.produto, o.problema, o.status, data_abertura, c.nome as cli_nome, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN funcionarios as f on o.tecnico = f.id where f.nome = '$usuario' and o.status = 'Aberto' order by o.id asc"; 
                         }
 
                         
@@ -126,11 +126,11 @@ include('verificar_login.php');
                           </th>
 
                           <th>
-                            Valor Total
+                            Defeito
                           </th>
 
                           <th>
-                            Status
+                            Data Abertura
                           </th>
 
                           <th>
@@ -146,8 +146,8 @@ include('verificar_login.php');
                             $cliente = $res_1["cli_nome"];
                             $tecnico = $res_1["func_nome"];
                             $produto = $res_1["produto"];
-                            $valor_total = $res_1["valor_total"];
-                            $status = $res_1["status"];
+                            $defeito = $res_1["problema"];
+                            $data_abertura = $res_1["data_abertura"];
 
                             $id = $res_1["id"];
 
@@ -158,13 +158,13 @@ include('verificar_login.php');
                              <td><?php echo $cliente; ?></td>
                              <td><?php echo $tecnico; ?></td> 
                              <td><?php echo $produto; ?></td>
-                             <td><?php echo $valor_total; ?></td>
-                             <td><?php echo $status; ?></td>
+                             <td><?php echo $defeito; ?></td>
+                             <td><?php echo $data_abertura; ?></td>
                              
                              <td>
-                             <a class="btn btn-info" href="abrir_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fa fa-pencil-square-o"></i></a>
+                             <a class="btn btn-info" href="fechar_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fa fa-pencil-square-o"></i></a>
 
-                             <a class="btn btn-danger" href="abrir_orcamentos.php?func=deleta&id=<?php echo $id; ?>"><i class="fa fa-minus-square"></i></a>
+                             <a class="btn btn-danger" href="fechar_orcamentos.php?func=deleta&id=<?php echo $id; ?>"><i class="fa fa-minus-square"></i></a>
 
                              </td>
                             </tr>
