@@ -18,7 +18,7 @@
 </style>
 
 <div class="alert alert-secondary" role="alert">
-    <img src="../img/logo.png" />
+    <img src="http://localhost/Sistema-de-Orcamentos/img/Logo.png"/> <!-- O caminho da imagem tem que ser absoluto!-->
 </div>
 
 <div class="footer alert alert-secondary" role="alert">
