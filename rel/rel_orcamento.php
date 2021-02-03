@@ -1,5 +1,13 @@
 <?php
+include('../conexao.php');
+
 $id = $_GET['id'];
+
+$query = "select * from orcamentos where id = '$id'";
+$result = mysqli_query($conexao, $query);
+
+while($res_1 = mysqli_fetch_array($result)){
+
 ?>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -97,7 +105,7 @@ $id = $_GET['id'];
             <p style="font-size:12px">Telefone:</p>
         </div>
         <div class="col-sm-3">
-            <p style="font-size:12px">CPF:</p>
+            <p style="font-size:12px">CPF: <?php echo $res_1['cliente']; ?></p>
         </div>
     </div>
 
@@ -110,10 +118,10 @@ $id = $_GET['id'];
     </div>
     <div class="row">
         <div class="col-sm-3">
-            <p style="font-size:12px">Produto:</p>
+            <p style="font-size:12px">Produto: <?php echo $res_1['produto']; ?></p>
         </div>
         <div class="col-sm-3">
-            <p style="font-size:12px">Nº Série:</p>
+            <p style="font-size:12px">Nº Série: <?php echo $res_1['serie'];?></p>
         </div>
         <div class="col-sm-3">
             <p style="font-size:12px">Modelo:</p>
@@ -121,7 +129,7 @@ $id = $_GET['id'];
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <p style="font-size:12px">Defeito:</p>
+            <p style="font-size:12px">Defeito: <?php echo $res_1['problema'];?></p>
         </div>
     </div>
 
@@ -134,7 +142,7 @@ $id = $_GET['id'];
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <p style="font-size:12px">Laudo:</p>
+            <p style="font-size:12px">Laudo: <?php echo $res_1['laudo'];?></p>
         </div>
     </div>
 
@@ -181,3 +189,5 @@ $id = $_GET['id'];
 <div class="footer">
 <p style="text-align:center">Desenvolvido por Fabricio Conceição</p>
 </div>
+
+<?php } ?>
