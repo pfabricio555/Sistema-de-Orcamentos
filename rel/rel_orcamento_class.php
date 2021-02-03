@@ -5,6 +5,8 @@ require_once '../dompdf/autoload.inc.php';
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
+$id = $_GET['id'];
+
 //INSTANCIA DE OPTIONS
 $options = new Options();
 $options->setIsRemoteEnabled(true);
@@ -13,7 +15,7 @@ $options->setIsRemoteEnabled(true);
 $dompdf = new Dompdf($options);
 
 // ALIMENTAR OS DADOS NO RELATÓRIO
-$html = utf8_encode(file_get_contents("rel_orcamento.php"));
+$html = utf8_encode(file_get_contents("http://localhost/Sistema-de-Orcamentos/rel/rel_orcamento.php?id=".$id));
 
 // DEFINIR O TAMANHO DO PAPEL E ORIENTAÇÃO DA PÁGINA
 $dompdf->setPaper('A4', 'portrait');
@@ -26,9 +28,8 @@ $dompdf->render();
 
 //NOMEAR O PDF GERADO
 $dompdf->stream(
-'relatorioOrcamento.pdf',
+'relatorio.pdf',
 array("Attachment" => false)
 );
 
 ?>
-

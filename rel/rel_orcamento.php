@@ -1,3 +1,7 @@
+<?php
+$id = $_GET['id'];
+?>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 <style>
@@ -63,7 +67,7 @@
 
     <div class="row">
         <div class="col-sm-8">
-            <big> Orçamento Nº 50</big>
+            <big> Orçamento Nº <?php echo $id ?></big>
         </div>
         <div class="col-sm-4">
             <big> Data: 10/10/2021 </big>
