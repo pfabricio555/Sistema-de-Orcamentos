@@ -335,7 +335,7 @@ $result = mysqli_query($conexao, $query);
               </div>
               <div class="form-group">
                 <label for="id_produto">Telefone</label>
-                <input type="text" class="form-control mr-2" name="txttelefone" id="txttelefone" placeholder="Telefone" value="<?php echo $res_1['telefone']; ?>" required>
+                <input type="text" class="form-control mr-2" name="txttelefone" id="txttelefoneMaks" placeholder="Telefone" value="<?php echo $res_1['telefone']; ?>" required>
               </div>
               <div class="form-group">
                 <label for="quantidade">Endereço</label>
@@ -416,7 +416,7 @@ if($result_editar == ''){
 
 <script type="text/javascript">
     $(document).ready(function(){
-      $('#txttelefone').mask('(00) 00000-0000');
+      $('#txttelefoneMaks').mask('(00) 00000-0000');
       $('#txtcpfMaks').mask('000.000.000-00');
       });
 </script>

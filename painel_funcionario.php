@@ -67,9 +67,9 @@ include('verificar_login.php');
             </a>
           </li>
           <li>
-            <a href="./notifications.html">
+            <a href="rel_orcamentos.php">
               <i class="nc-icon nc-bell-55"></i>
-              <p>Notifications</p>
+              <p>Relatório Orçamento</p>
             </a>
           </li>
           <li>
