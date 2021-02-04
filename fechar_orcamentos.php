@@ -77,9 +77,9 @@ include('verificar_login.php');
                         $usuario = $_SESSION['nome_usuario'];
                         if(isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != ''){
                           $data = $_GET['txtpesquisar'] . '%';
-                           $query = "select o.id, o.cliente, o.tecnico, o.produto, o.problema, o.status, data_abertura, c.nome as cli_nome, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN funcionarios as f on o.tecnico = f.id where f.nome = '$usuario' and o.status = 'Aberto' order by o.id asc"; 
+                           $query = "select o.id, o.cliente, o.tecnico, o.produto, o.problema, o.status, o.data_abertura, c.nome as cli_nome, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN funcionarios as f on o.tecnico = f.id where f.nome = '$usuario' and o.status = 'Aberto' order by o.id asc"; 
                         }else{
-                         $query = "select o.id, o.cliente, o.tecnico, o.produto, o.problema, o.status, data_abertura, c.nome as cli_nome, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN funcionarios as f on o.tecnico = f.id where f.nome = '$usuario' and o.status = 'Aberto' order by o.id asc"; 
+                         $query = "select o.id, o.cliente, o.tecnico, o.produto, o.problema, o.status, o.data_abertura, c.nome as cli_nome, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN funcionarios as f on o.tecnico = f.id where f.nome = '$usuario' and o.status = 'Aberto' order by o.id asc"; 
                         }
 
                         
