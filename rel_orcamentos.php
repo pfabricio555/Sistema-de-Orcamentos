@@ -177,7 +177,7 @@ include('verificar_login.php');
                              <td>
                                 <a class="btn btn-info" href="rel/rel_orcamento_class.php?id=<?php echo $id; ?>&email=<?php echo $email; ?>" target="_blank"><i class="fa fa-pencil-square-o"></i></a>
 
-                                <a class="btn btn-success" href="rel/aprovar_orcamentos.php?id=<?php echo $id; ?>"><i class="fa fa-check-circle"></i></a>
+                                <a class="btn btn-success" href="rel_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fa fa-check-circle"></i></a>
                             </tr>
 
                             <?php 
@@ -199,3 +199,86 @@ include('verificar_login.php');
 
 </body>
 </html>
+
+
+<!--EDITAR -->
+<?php
+if(@$_GET['func'] == 'edita'){  
+$id = $_GET['id'];
+$query = "select * from orcamentos where id = '$id'";
+$result = mysqli_query($conexao, $query);
+
+ while($res_1 = mysqli_fetch_array($result)){
+$total = $res_1['total'];
+ }
+
+?>
+
+  <!-- Modal -->
+      <div id="modalEditar" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+         <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              
+              <h4 class="modal-title">Aprovar Orçamento</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <form method="POST" action="">
+               
+              <div class="form-group">
+                <label for="fornecedor">Forma de Pagamento</label>
+                
+                  <select class="form-control mr-2" id="category" name="pgto">      
+
+                    <option value="Dinheiro">Dinheiro</option>
+                    <option value="Cartao">Cartão</option>  
+
+                  </select>
+              </div>
+              <div class="form-group">
+                <label for="quantidade">Desconto</label>
+                <input type="text" class="form-control mr-2" name="txtdesconto" value="" placeholder="Desconto" >
+              </div>
+                           
+            </div>
+                   
+            <div class="modal-footer">
+               <button type="submit" class="btn btn-success mb-3" name="buttonEditar">Salvar </button>
+
+
+                <button type="button" class="btn btn-danger mb-3" data-dismiss="modal">Cancelar </button>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>    
+
+ 
+
+ <script> $("#modalEditar").modal("show"); </script> 
+
+<!--Comando para editar os dados UPDATE -->
+<?php
+if(isset($_POST['buttonEditar'])){
+  $pgto = $_POST['pgto'];
+  $desconto = $_POST['txtdesconto'];
+  $valor_total = $total - $desconto;
+
+  $query_editar = "UPDATE orcamentos set desconto = '$desconto', valor_total = '$valor_total', pgto = '$pgto', data_aprovacao = curDate(), status = 'Aprovado' where id = '$id' ";
+
+  $result_editar = mysqli_query($conexao, $query_editar);
+
+  if($result_editar == ''){
+    echo "<script language='javascript'> window.alert('Ocorreu um erro ao Editar!'); </script>";
+  }else{
+      echo "<script language='javascript'> window.alert('Editado com Sucesso!'); </script>";
+      echo "<script language='javascript'> window.location='rel_orcamentos.php'; </script>";
+  }
+
+}
+?>
+
+
+<?php }   ?>
