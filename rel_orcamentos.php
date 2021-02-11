@@ -176,7 +176,8 @@ include('verificar_login.php');
                              
                              <td>
                                 <a class="btn btn-info" href="rel/rel_orcamento_class.php?id=<?php echo $id; ?>&email=<?php echo $email; ?>" target="_blank"><i class="fa fa-pencil-square-o"></i></a>
-                             </td>
+
+                                <a class="btn btn-success" href="rel/aprovar_orcamentos.php?id=<?php echo $id; ?>"><i class="fa fa-check-circle"></i></a>
                             </tr>
 
                             <?php 

@@ -36,7 +36,7 @@ array("Attachment" => false)
 // ENVIAR O ORÇAMENTO POR EMAIL
 $to = 'pfabricio555@outlook.com';
 $subject = 'JC Inject Orçamento';
-$message = file_get_contents("http://localhost/Sistema-de-Orcamentos/rel/rel_orcamento.php?id=".$id);
+$message = file_get_contents("http://localhost/Sistema-de-Orcamentos/rel/rel_orcamento.php");
 $dest = $email;
 $headers = 'Content-type: text/html; charset=utf-8;';
 mail($to, $subject, $message, $headers);
