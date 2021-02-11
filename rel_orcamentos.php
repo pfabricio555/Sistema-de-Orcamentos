@@ -91,18 +91,18 @@ include('verificar_login.php');
 
                         if(isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '' and $_GET['status'] != 'Aguardando') {
                           $data = $_GET['txtpesquisar'] . '%';
-                          $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.status, o.data_abertura, c.nome as cli_nome, c.telefone, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN funcionarios as f on o.tecnico = f.id where data_abertura = '$data' and status = 'Aprovado' order by id asc";
+                          $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.status, o.data_abertura, c.nome as cli_nome, c.telefone, c.email, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN funcionarios as f on o.tecnico = f.id where data_abertura = '$data' and status = 'Aprovado' order by id asc";
                         }
                         elseif(isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] == '' and $_GET['status'] != 'Aguardando') {
                             $data = $_GET['txtpesquisar'] . '%';
-                            $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.status, o.data_abertura, c.nome as cli_nome, c.telefone, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN funcionarios as f on o.tecnico = f.id where data_abertura = curDate() and status = 'Aprovado' order by id asc";
+                            $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.status, o.data_abertura, c.nome as cli_nome, c.telefone, c.email, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN funcionarios as f on o.tecnico = f.id where data_abertura = curDate() and status = 'Aprovado' order by id asc";
                         }
                         elseif(isset($_GET['buttonPesquisar']) and $_GET['txtpesquisar'] != '' and $_GET['status'] == 'Aguardando') {
                             $data = $_GET['txtpesquisar'] . '%';
-                            $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.status, o.data_abertura, c.nome as cli_nome, c.telefone, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN funcionarios as f on o.tecnico = f.id where data_abertura = '$data' and status = 'Aguardando' order by id asc";
+                            $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.status, o.data_abertura, c.nome as cli_nome, c.telefone, c.email, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN funcionarios as f on o.tecnico = f.id where data_abertura = '$data' and status = 'Aguardando' order by id asc";
                         }
                         else{
-                         $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.status, o.data_abertura, c.nome as cli_nome, c.telefone, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN funcionarios as f on o.tecnico = f.id where status = 'Aguardando' order by data_abertura asc"; 
+                         $query = "select o.id, o.cliente, o.tecnico, o.produto, o.valor_total, o.status, o.data_abertura, c.nome as cli_nome, c.telefone, c.email, f.nome as func_nome from orcamentos as o INNER JOIN clientes as c on o.cliente = c.cpf INNER JOIN funcionarios as f on o.tecnico = f.id where status = 'Aguardando' order by data_abertura asc"; 
                         }
 
                         
@@ -159,6 +159,7 @@ include('verificar_login.php');
                             $produto = $res_1["produto"];
                             $data = $res_1["data_abertura"];
                             $telefone = $res_1["telefone"];
+                            $email = $res_1["email"];
 
                             $id = $res_1["id"];
                             $data2 = implode('/', array_reverse(explode('-', $data)));
@@ -174,7 +175,7 @@ include('verificar_login.php');
                              <td><?php echo $telefone; ?></td>
                              
                              <td>
-                                <a class="btn btn-info" href="rel/rel_orcamento_class.php?id=<?php echo $id; ?>"><i class="fa fa-pencil-square-o"></i></a>
+                                <a class="btn btn-info" href="rel/rel_orcamento_class.php?id=<?php echo $id; ?>&?email=<?php echo $email; ?>"><i class="fa fa-pencil-square-o"></i></a>
                              </td>
                             </tr>
 

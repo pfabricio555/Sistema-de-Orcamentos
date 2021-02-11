@@ -6,6 +6,7 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 
 $id = $_GET['id'];
+$email = $_GET['email'];
 
 //INSTANCIA DE OPTIONS
 $options = new Options();

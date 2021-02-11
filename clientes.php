@@ -219,7 +219,7 @@ include('conexao.php');
               </div>
               <div class="form-group">
                 <label for="id_produto">Telefone</label>
-                <input type="text" class="form-control mr-2" name="txttelefone" id="txttelefone" placeholder="Telefone" required>
+                <input type="text" class="form-control mr-2" name="txttelefone" id="txttelefoneMaks" placeholder="Telefone" required>
               </div>
               <div class="form-group">
                 <label for="quantidade">Endereço</label>
