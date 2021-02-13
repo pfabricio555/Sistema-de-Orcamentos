@@ -81,7 +81,7 @@ include('verificar_login.php');
           <li>
             <a href="./tables.html">
               <i class="nc-icon nc-tile-56"></i>
-              <p>Table List</p>
+              <p>Consultar OS</p>
             </a>
           </li>
           <li>

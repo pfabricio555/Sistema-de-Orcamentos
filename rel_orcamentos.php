@@ -274,7 +274,7 @@ if(isset($_POST['buttonEditar'])){
   $result_editar = mysqli_query($conexao, $query_editar);
 
   //FAZER A ABERTURA DA OS
-  $query_os = "INSERT INTO os (id_orc, cliente, produto, tecnico, total, data_abertura, status) VALUES ('$id', '$cliente', '$produto', '$tecnico', '$valor_total', curDate(), 'Aberto' )";
+  $query_os = "INSERT INTO os (id_orc, cliente, produto, tecnico, total, data_abertura, status) VALUES ('$id', '$cliente', '$produto', '$tecnico', '$valor_total', curDate(), 'Aberta' )";
 
   mysqli_query($conexao, $query_os);
 
