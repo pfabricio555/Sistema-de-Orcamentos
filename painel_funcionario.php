@@ -73,9 +73,9 @@ include('verificar_login.php');
             </a>
           </li>
           <li>
-            <a href="./user.html">
-              <i class="nc-icon nc-single-02"></i>
-              <p>User Profile</p>
+            <a href="os_abertas.php">
+              <i class="nc-icon nc-tile-56"></i>
+              <p>OS Abertas</p>
             </a>
           </li>
           <li>
