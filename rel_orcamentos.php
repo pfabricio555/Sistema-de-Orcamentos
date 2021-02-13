@@ -210,6 +210,9 @@ $result = mysqli_query($conexao, $query);
 
  while($res_1 = mysqli_fetch_array($result)){
 $total = $res_1['total'];
+$cliente = $res_1['cliente'];
+$produto = $res_1['produto'];
+$tecnico = $res_1['tecnico'];
  }
 
 ?>
@@ -269,6 +272,11 @@ if(isset($_POST['buttonEditar'])){
   $query_editar = "UPDATE orcamentos set desconto = '$desconto', valor_total = '$valor_total', pgto = '$pgto', data_aprovacao = curDate(), status = 'Aprovado' where id = '$id' ";
 
   $result_editar = mysqli_query($conexao, $query_editar);
+
+  //FAZER A ABERTURA DA OS
+  $query_os = "INSERT INTO os (id_orc, cliente, produto, tecnico, total, data_abertura, status) VALUES ('$id', '$cliente', '$produto', '$tecnico', '$valor_total', curDate(), 'Aberto' )";
+
+  mysqli_query($conexao, $query_os);
 
   if($result_editar == ''){
     echo "<script language='javascript'> window.alert('Ocorreu um erro ao Editar!'); </script>";
