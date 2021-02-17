@@ -49,9 +49,9 @@ include('verificar_login.php');
     <form class="form-inline my-2 my-lg-0">
       <select class="form-control mr-2" id="category" name="status">
         <option value="Todos">Todos</option>
-        <option value="Aberto">Aberta</option>
-        <option value="Fechado">Fechada</option>
-        <option value="Cancelado">Cancelada</option>
+        <option value="Aberta">Aberta</option>
+        <option value="Fechada">Fechada</option>
+        <option value="Cancelada">Cancelada</option>
       </select>
       <input name="txtpesquisar" class="form-control mr-sm-2" type="date" placeholder="Pesquisar" aria-label="Pesquisar">
       <button name="buttonPesquisar" class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
@@ -132,15 +132,23 @@ include('verificar_login.php');
                           </th>
 
                           <th>
-                            Técnico
-                          </th>
-
-                          <th>
                             Produto
                           </th>
 
                           <th>
+                            Técnico
+                          </th>
+
+                          <th>
                             Valor Total
+                          </th>
+
+                          <th>
+                            Data Abertura
+                          </th>
+
+                          <th>
+                            Data Fechamento
                           </th>
 
                           <th>
@@ -157,22 +165,39 @@ include('verificar_login.php');
                          <?php 
 
                           while($res_1 = mysqli_fetch_array($result)){
-                            $cliente = $res_1["cli_nome"];
-                            $tecnico = $res_1["func_nome"];
+                            $cliente = $res_1["cliente"];
+                            $tecnico = $res_1["tecnico"];
                             $produto = $res_1["produto"];
-                            $valor_total = $res_1["valor_total"];
+                            $valor_total = $res_1["total"];
+                            $data_abertura = $res_1["data_abertura"];
+                            $data_fechamento = $res_1["data_fechamento"];
                             $status = $res_1["status"];
 
+                            $data2 = implode('/', array_reverse(explode('-', $data_abertura)));
+                            $data3 = implode('/', array_reverse(explode('-', $data_fechamento)));
+
                             $id = $res_1["id"];
+
+                            $query_cliente = "select * from clientes where cpf = '$cliente'";
+                            $result_cliente = mysqli_query($conexao, $query_cliente);
+                            while($res_cliente = mysqli_fetch_array($result_cliente)){
+                              $nome_cliente = $res_cliente['nome'];
+                            
+                              $query_tecnico = "select * from funcionarios where id = '$tecnico'";
+                              $result_tecnico = mysqli_query($conexao, $query_tecnico);
+                              while($res_tecnico = mysqli_fetch_array($result_tecnico)){
+                                $nome_tecnico = $res_tecnico['nome'];
 
                             ?>
 
                             <tr>
 
-                             <td><?php echo $cliente; ?></td>
-                             <td><?php echo $tecnico; ?></td> 
+                             <td><?php echo $nome_cliente; ?></td>
                              <td><?php echo $produto; ?></td>
+                             <td><?php echo $nome_tecnico; ?></td> 
                              <td><?php echo $valor_total; ?></td>
+                             <td><?php echo $data2; ?></td>
+                             <td><?php echo $data3; ?></td>
                              <td><?php echo $status; ?></td>
                              
                              <td>
@@ -184,7 +209,7 @@ include('verificar_login.php');
                             </tr>
 
                             <?php 
-                              }                        
+                              }  }  }                       
                             ?>
                             
 
