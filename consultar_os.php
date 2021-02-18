@@ -172,6 +172,7 @@ include('verificar_login.php');
                             $data_abertura = $res_1["data_abertura"];
                             $data_fechamento = $res_1["data_fechamento"];
                             $status = $res_1["status"];
+                            $id_orc = $res_1["id_orc"];
 
                             $data2 = implode('/', array_reverse(explode('-', $data_abertura)));
                             $data3 = implode('/', array_reverse(explode('-', $data_fechamento)));
@@ -188,11 +189,38 @@ include('verificar_login.php');
                               while($res_tecnico = mysqli_fetch_array($result_tecnico)){
                                 $nome_tecnico = $res_tecnico['nome'];
 
+                                $query_email = "select * from orcamentos where id = '$id_orc'";
+                                $result_email = mysqli_query($conexao, $query_email);
+                            
+                                while($res_2 = mysqli_fetch_array($result_email)){
+                                  $cpf = $res_2['cliente'];
+                            
+                                  $query_cli = "select * from clientes where cpf = '$cpf'";
+                                  $result_cli = mysqli_query($conexao, $query_cli);
+                            
+                                  while($res_3 = mysqli_fetch_array($result_cli)){
+                                    $email = $res_3['email'];
+                                  }
+                                  
+                                }
+
                             ?>
 
                             <tr>
 
-                             <td><?php echo $nome_cliente; ?></td>
+                                <?php
+                                    if($status == "Fechada"){
+                                ?>
+
+                             <td><?php echo '<a class="link" href="rel/rel_os_class.php?id='.$id.'&id_orc='.$id_orc.'&email='.$email.'">'; echo $nome_cliente; '</a>';?></td>
+
+                              <?php }
+                                else{
+                              ?>
+                              <td><?php echo $nome_cliente;?></td>
+                              <?php    
+                                }
+                              ?>
                              <td><?php echo $produto; ?></td>
                              <td><?php echo $nome_tecnico; ?></td> 
                              <td><?php echo $valor_total; ?></td>
