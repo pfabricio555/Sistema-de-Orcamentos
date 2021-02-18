@@ -203,6 +203,28 @@ if(@$_GET['func'] == 'deleta'){
 if(@$_GET['func'] == 'edita'){  
 $id = $_GET['id'];
 
+$query = "select * from os where id = '$id'";
+$result = mysqli_query($conexao, $query);
+
+ while($res_1 = mysqli_fetch_array($result)){
+    $id_orc = $res_1['id_orc'];
+
+    $query_email = "select * from orcamentos where id = '$id_orc'";
+    $result_email = mysqli_query($conexao, $query_email);
+
+    while($res_2 = mysqli_fetch_array($result_email)){
+      $cpf = $res_2['cliente'];
+
+      $query_cli = "select * from clientes where cpf = '$cpf'";
+      $result_cli = mysqli_query($conexao, $query_cli);
+
+      while($res_3 = mysqli_fetch_array($result_cli)){
+        $email = $res_3['email'];
+      }
+      
+    }
+  }
+
 ?>
 
   <!-- Modal -->
@@ -243,6 +265,7 @@ $id = $_GET['id'];
 <!--Comando para editar os dados UPDATE -->
 <?php
 if(isset($_POST['buttonEditar'])){
+
   $garantia = $_POST['txtgarantia'];
 
   $query_editar = "UPDATE os set garantia = '$garantia', data_fechamento = curDate(), status = 'Fechada' where id = '$id' ";
@@ -253,7 +276,7 @@ if(isset($_POST['buttonEditar'])){
     echo "<script language='javascript'> window.alert('Ocorreu um erro ao Editar!'); </script>";
   }else{
       echo "<script language='javascript'> window.alert('Editado com Sucesso!'); </script>";
-      echo "<script language='javascript'> window.location='os_abertas.php'; </script>";
+      echo "<script language='javascript'> window.location='rel/rel_os_class.php?id=$id&id_orc=$id_orc&email=$email'; </script>";
   }
 
 }

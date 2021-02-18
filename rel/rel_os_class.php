@@ -6,6 +6,7 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 
 $id = $_GET['id'];
+$id_orc = $_GET['id_orc'];
 $email = $_GET['email'];
 
 //INSTANCIA DE OPTIONS
@@ -16,7 +17,7 @@ $options->setIsRemoteEnabled(true);
 $dompdf = new Dompdf($options);
 
 // ALIMENTAR OS DADOS NO RELATÓRIO
-$html = utf8_encode(file_get_contents("http://localhost/Sistema-de-Orcamentos/rel/rel_os.php?id=".$id));
+$html = utf8_encode(file_get_contents("http://localhost/Sistema-de-Orcamentos/rel/rel_os.php?id=".$id."&id_orc=".$id_orc));
 
 // DEFINIR O TAMANHO DO PAPEL E ORIENTAÇÃO DA PÁGINA
 $dompdf->setPaper('A4', 'portrait');
