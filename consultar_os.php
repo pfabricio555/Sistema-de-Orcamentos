@@ -212,7 +212,7 @@ include('verificar_login.php');
                                     if($status == "Fechada"){
                                 ?>
 
-                             <td><?php echo '<a class="link" href="rel/rel_os_class.php?id='.$id.'&id_orc='.$id_orc.'&email='.$email.'">'; echo $nome_cliente; '</a>';?></td>
+                             <td><?php echo '<a class="link" href="rel/rel_os_class.php?id='.$id.'&id_orc='.$id_orc.'&email='.$email.'" target="_blank">'; echo $nome_cliente; '</a>';?></td>
 
                               <?php }
                                 else{

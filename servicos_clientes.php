@@ -147,9 +147,6 @@ include('verificar_login.php');
                              <td><?php echo $data3; ?></td>
                              <td><?php echo $status; ?></td>
                              
-                             <td>
-                             <a class="btn btn-primary" href="fechar_orcamentos.php?func=edita&id=<?php echo $id; ?>"><i class="fa fa-pencil-square-o"></i></a>
-                             </td>
                             </tr>
 
                             <?php 
@@ -165,6 +162,121 @@ include('verificar_login.php');
                     </div>
                   </div>
                 </div>
+
+                <br>
+
+                <div class="row mt-3">
+                  <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h4 class="card-title">Ordens de Serviços do cliente</h4>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+
+                      <!--LISTAR TODOS AS ORDEM DE SERVIÇOS -->
+
+                      <?php
+                        
+                        $cpf = $_GET['cpf'];
+                        $query = "select * from os where cliente = '$cpf'"; 
+                                                
+
+                        $result = mysqli_query($conexao, $query);
+                        //$dado = mysqli_fetch_array($result);
+                        $row = mysqli_num_rows($result);
+
+                        if($row == ''){
+
+                            echo "<h3> Não existem dados cadastrados no banco </h3>";
+
+                        }else{
+
+                           ?>
+
+                          
+
+                      <table class="table">
+                        <thead class=" text-primary">
+                          
+                          <th>
+                            Produto
+                          </th>
+
+                          <th>
+                            Total
+                          </th>
+
+                          <th>
+                            Data Abertura
+                          </th>
+
+                          <th>
+                            Data Fechamento
+                          </th>
+
+                          <th>
+                            Garantia
+                          </th>
+
+                          <th>
+                            Status
+                          </th>
+                          
+                        </thead>
+                        <tbody>
+                         
+                         <?php 
+
+                          while($res_1 = mysqli_fetch_array($result)){
+                            $produto = $res_1["produto"];
+                            $total = $res_1["total"];
+                            $data_abertura = $res_1["data_abertura"];
+                            $data_fechamento = $res_1["data_fechamento"];
+                            $garantia = $res_1["garantia"];
+                            $status = $res_1["status"];
+
+                            $id = $res_1["id"];
+                            $data2 = implode('/', array_reverse(explode('-', $data_abertura)));
+                            $data3 = implode('/', array_reverse(explode('-', $data_fechamento)));
+
+                            ?>
+
+                            <tr>
+
+                             <td><?php echo $produto; ?></td>
+                             <td><?php echo $total; ?></td> 
+                             <td><?php echo $data2; ?></td>
+                             <td><?php echo $data3; ?></td>
+                             <td><?php echo $garantia; ?></td>
+                             <td><?php echo $status; ?></td>
+                             
+                            </tr>
+
+                            <?php 
+                              }                        
+                            ?>
+                            
+
+                        </tbody>
+                      </table>
+                          <?php 
+                              }                        
+                            ?>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+                
               </div>
 
 </div>   
